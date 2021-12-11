@@ -1,37 +1,157 @@
 import pandas as pd
-
-# исходный csv-файл
-file_path = 'D:\Test.csv - test.csv'
-# базовый DF
-src_df = pd.read_csv(file_path)
+import pandasql as ps
+import pyodbc
 
 
-# Читаем весь DF
-src_df
-# Читаем первые несколько записей в DF
-src_df.head()
+######################################################################################################################
+# import data
 
-# выбираем только нужные колонки и фильтруем
-src_df[['order_id_new', 'metered_price', 'upfront_price']] \
-    [(src_df['metered_price'] > round(src_df['upfront_price'] * 1.2,2)) \
-     | \
-     (src_df['metered_price'] < round(src_df['upfront_price'] * 0.8,2))] \
-    #.head() 
+##############
+## csv
+csv_file_path = 'D:\Test.csv'
+df = pd.read_csv(csv_file_path)
+
+##############
+## excel
+
+##############
+## DataBase (ExA example)
+
+### 1. Connect to DB (ODBC)
+"""
+You need to install ODBC driver for a connection to DB
+https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver15
+"""
+driver = 'ODBC Driver 17 for SQL Server'
+server = 'Server_name'
+database = 'DB_name'
+
+connection_string = f'DRIVER={driver};SERVER={server};DATABASE={database};Trusted_Connection=yes;'
+cnxn_exa = pyodbc.connect(connection_string)
+
+### 2. SQL query (2 ways)
+
+#### SQL Query
+sql_query = 'select top(5) location_id, location_name from exa.dim_location'
+
+#### SQL Query from the file
+script_file = 'ExA sql_query with discount.txt'  # file with your query
+with open(script_file) as f:
+    sql_query = f.read()
+f.close()
+
+### 3. Get data
+df = pd.read_sql(sql_query, cnxn_exa)
 
 
-# добавляем даты
-artists_df['Stamp_datetime'] = pd.to_datetime(artists_df['Stamp'].str[:-10])
-artists_df['Stamp_day'] = artists_df['Stamp_datetime'].dt.date # date
-artists_df['Stamp_weekday'] = artists_df['Stamp_datetime'].dt.dayofweek # day of week, 0 – Monday, 6 – Sunday
-artists_df['Stamp_hour'] = artists_df['Stamp_datetime'].dt.hour # hour
+######################################################################################################################
+# export data
 
-.to_excel('temp4.xlsx')
-.to_csv('temp.csv')
+##############
+## csv
+df.to_csv("file_name.csv")
+
+##############
+## excel
+df.to_excel('file_name.xlsx')
 
 
-df_4.groupby(['driver_device_uid_new', 'pred_quality'])['order_id_new'].count().to_excel('temp6.xlsx')  
+######################################################################################################################
+# pandas preferences
+pd.options.display.max_columns = None   # show all of the columns
+pd.options.display.max_rows = None      # show all of the rows, use carefully with huge datasets
+pd.options.display.max_rows = 200       # not more than 200 rows
+pd.options.display.max_colwidth = None  # show full column value
 
 
+######################################################################################################################
+# Pandas DataFrame
+
+##############
+## General info
+df.columns                      # column list
+df.dtypes                       # column data types
+df.shape                        # number of rows and columns
+df.describe(include = 'all')    # quick overview of data in DF
+
+##############
+## Read
+df                              # Whole DF
+df.head()                       # First rows
+df[['column_1', 'column_2'']]   # Read only 2 columns
+
+##############
+## Diferent operations
+df[df['country_code'] == 'US']      # filter data
+df.drop_duplicates(inplace=True)    # drop duplicates. inplace=True - changes will be applied to the current DF
+    
+##############
+## Columns
+
+### data type
+df['date'] = pd.to_datetime(df['datetime']).dt.date     # to date
+df['some_numbers'] = df['some_numbers'].astype(str)     # to string
+
+### rename
+df.rename(columns={"column_1": "new_column_1"}, inplace=True)   # column_1 -> new_column_1
+
+### delete
+df.drop(columns = ['column_1', 'new_column_1'], inplace=True) 
+
+### dates
+df['date'] = df['datetime'].dt.date                             # date from datetime
+df['date_month'] = df['datetime'].dt.month                      # month
+df['date_day_of_the_year'] = df['datetime'].dt.day_of_year      # day of the year
+df['date_weekday'] = df['datetime'].dt.dayofweek                # day of week, 0 – Monday, 6 – Sunday
+df['date_hour'] = df['datetime'].dt.hour                        # hour
+df['days_since_smth'] = (df['date'] - df['reg_date']).dt.days   # number of days between two dates
+
+### calcs (tbd)
+df['discount_perc_item_price'] = 100 - round(order_df['net_price_per_item'] / order_df['gross_price_per_item'] * 100, 2)
+# delete lambda x? df['items_gross_price'] = df.apply(lambda x: parse_shipping(x['shippings']), axis=1)   # using functions
+df['bp_id'].fillna(df['email'], inplace = True)    # use email if bp_id is null
+
+
+##############
+## Group by
+df.groupby(['column_1', 'column_2'])['column_3'].count()            # group by column_1 and column_2; count(column_3)
+df.groupby('column_1', as_index=False).agg({'column_2': "count"})   # group by column_1; count(column_2)
+
+##############
+## Order by
+df.sort_values('column_1', ascending = False)
+    
+    
+##############
+## Visualization (TBD)
+df.plot(x="column_1", y="column_2");
+
+
+##############
+## Merge / Join
+new_df = pd.merge(
+    df_1, 
+    df_2, 
+    how = 'left',
+    left_on = 'cust_id', 
+    right_on = 'cust_no')
+    
+    
+######################################################################################################################
+# PandaSQL
+query = """ select * from df """
+ps.sqldf(query, locals())       # you can save results as a new DF (new_df = ps.sqldf(query, locals()))
+
+    
+    
+    
+
+
+
+
+
+
+# TBD later
 from datetime import datetime
 
 asd = '2020-02-02 0:01:16'
@@ -42,26 +162,18 @@ datetime_object = datetime.strptime(asd, '%Y-%m-%d %H:%M:%S')
 print(datetime_object)
 print(datetime_object.weekday())
 
-df_2['date_col'] = pd.to_datetime(df_2['calc_created'])
 
-
-
-general_message_data_df.rename(columns={"message_ts_datetime": "sms_cnt"}, inplace=True)
-general_message_data_df['avg_month'] = general_message_data_df['sms_cnt'] / 30
-
-.sort_values('message_ts_datetime', ascending = False)
-
-
-print(src_df.shape[0], src_df.shape[1])
-
-# Если есть вложенные агрегаты - надо использовать tuple
+# in some cases you shoul use tuple as colum name
 .sort_values(('user_id', 'count'), ascending = False)
 
-.describe(include = 'all')
 
-tmp_df = message_data_df \
-    .groupby('user_id', as_index=False).agg({'message_ts': "count"})
-tmp_df
+
+    
+    
+    
+    
+    
+    
 
 df_left = pd.merge(signup_data_df, general_message_data_agg_df, how='left', on = 'user_id')
 
@@ -86,17 +198,8 @@ combined_cleaned_df.groupby(['SMP_Station'], as_index=False).agg({
     'artist-track': ['count', 'nunique']
 })[[('SMP_Station',''), ('artist-track',   'count'), ('artist-track',   'nunique')]]
 
-# Переименовать колонки
-df_2.rename(columns={"ticket_id_new": "ticket_cnt", "overpaid_ride_ticket": "overpaid_ride_max"}, inplace=True)
 
-# преобразование в str и обрезка строки
-hour_created=src_df['calc_created'].str[11:-6]
 
-# удаление колонок
-tmp_df.drop(columns = ['Track', 'Artist'], inplace=True) 
-
-# Замена null-значений
-combined_df['SMP_Station'].fillna(combined_df['Feed_Name'], inplace = True)
 
 
 
