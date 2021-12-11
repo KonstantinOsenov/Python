@@ -81,8 +81,13 @@ df.head()                       # First rows
 df[['column_1', 'column_2'']]   # Read only 2 columns
 
 ##############
+## Filters
+df[df['country_code'] == 'US']              # by value
+df[df.index.isin((53, 55))]                 # by index
+df[~df.index.isin((53, 55))]                # '~' - NOT (not in (53, 55))
+df[df['column_1'].str.contains('ball')]     # substr 'ball' in column_1
+
 ## Diferent operations
-df[df['country_code'] == 'US']      # filter data
 df.drop_duplicates(inplace=True)    # drop duplicates. inplace=True - changes will be applied to the current DF
     
 ##############
@@ -125,7 +130,8 @@ df.sort_values('column_1', ascending = False)
 ##############
 ## Visualization (TBD)
 df.plot(x="column_1", y="column_2");
-
+df.plot.bar(rot=0)
+df.plot.bar()
 
 ##############
 ## Merge / Join
@@ -150,8 +156,8 @@ ps.sqldf(query, locals())       # you can save results as a new DF (new_df = ps.
 
 
 
-
-# TBD later
+######################################################################################################################
+# ToDo ToDo todotodotodotodo later
 from datetime import datetime
 
 asd = '2020-02-02 0:01:16'
@@ -167,31 +173,12 @@ print(datetime_object.weekday())
 .sort_values(('user_id', 'count'), ascending = False)
 
 
-
-    
-    
-    
-    
-    
-    
-
-df_left = pd.merge(signup_data_df, general_message_data_agg_df, how='left', on = 'user_id')
-
-#df_5.plot.bar(rot=0)
-    df_5.plot.bar()
-    #df_5.plot()
-
-# фильтрация по индексу (in)
-consumption_data_df[consumption_data_df.index.isin((53, 55))]
-# фильтрация по индексу (NOT in)
-consumption_data_df[~consumption_data_df.index.isin((15042, 147934))]
-
 # Выбор всех колонок в df + переименование итоговой суммы
 df_2 = consumption_data_df.groupby(consumption_data_df.columns.tolist()).size().reset_index().\
     rename(columns={0:'records'})
 
-# фильтрация по подстроке в строке
-df[df['ids'].str.contains("ball")]
+
+    
 
 # Если надо проселектить колонку "на лету" без создания DF, то надо использовать Tuple
 combined_cleaned_df.groupby(['SMP_Station'], as_index=False).agg({
@@ -202,23 +189,4 @@ combined_cleaned_df.groupby(['SMP_Station'], as_index=False).agg({
 
 
 
-
-#pandasql
-import pandasql as ps
-q = """
-    select
-        SMP_Station,
-        count(*) as plays_cnt,
-        count(distinct Artist_track) as songs_cnt,
-        count(distinct Stamp_day) as days_played_cnt,
-        min(Stamp_datetime) as min_date,
-        max(Stamp_datetime) as max_date
-    from 
-        artist3_df 
-    group by 
-        SMP_Station
-        
-"""
-radio1_df = ps.sqldf(q, locals())
-print(ps.sqldf(q, locals()))
 
