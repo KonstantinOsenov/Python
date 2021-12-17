@@ -186,7 +186,24 @@ combined_cleaned_df.groupby(['SMP_Station'], as_index=False).agg({
 })[[('SMP_Station',''), ('artist-track',   'count'), ('artist-track',   'nunique')]]
 
 
+# Define data types in DF
+data_types = {
+    'month': 'string', 
+    'id': np.int32, 
+    'sum': np.float64
+}
+df = pd.read_csv('some_data.csv', dtype=data_types)
+print(df)
+print('-------')
+print(df.dtypes)
 
 
-
+# union all from several data sources
+tmp_list = list()
+for filename in ('first_dataset.csv', 'second_dataset.csv'):
+    tmp_df = pd.read_csv(filename, index_col=None, header=0)
+    tmp_list.append(tmp_df)
+tmp_list
+final_df = pd.concat(tmp_list, axis=0, ignore_index=True)
+final_df
 
