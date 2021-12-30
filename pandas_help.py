@@ -115,6 +115,7 @@ df['days_since_smth'] = (df['date'] - df['reg_date']).dt.days   # number of days
 df['discount_perc_item_price'] = 100 - round(order_df['net_price_per_item'] / order_df['gross_price_per_item'] * 100, 2)
 # delete lambda x? df['items_gross_price'] = df.apply(lambda x: parse_shipping(x['shippings']), axis=1)   # using functions
 df['bp_id'].fillna(df['email'], inplace = True)    # use email if bp_id is null
+df['bp_id_new'] = np.where(df['bp_id'] == 'qwe', df['email'], df['bp_id']) # use email if bp_id = 'qwe' otherwise use bp_id
 
 
 ##############
