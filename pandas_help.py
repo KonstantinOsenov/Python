@@ -122,7 +122,9 @@ df['bp_id_new'] = np.where(df['bp_id'] == 'qwe', df['email'], df['bp_id']) # use
 ## Group by
 df.groupby(['column_1', 'column_2'])['column_3'].count()            # group by column_1 and column_2; count(column_3)
 df.groupby('column_1', as_index=False).agg({'column_2': "count"})   # group by column_1; count(column_2)
-
+### Rename column
+df.groupby('column_1', as_index=False).agg("new_name" = ('column_2', "count"))
+    
 ##############
 ## Order by
 df.sort_values('column_1', ascending = False)
