@@ -14,12 +14,12 @@ x = "fantastic"
 ## data types
 #################################
 type(x)
-# Text Type:	str
-# Numeric Types:	int, float, complex
+## Text Type:	str
+## Numeric Types:	int, float, complex
 # Sequence Types:	list, tuple, range
 # Mapping Type:	dict
 # Set Types:	set, frozenset
-# Boolean Type:	bool
+## Boolean Type:	bool
 # Binary Types:	bytes, bytearray, memoryview
 # None Type:	NoneType
 
@@ -44,14 +44,14 @@ print(b[-5:-2])
 
 # methods
 a = "qwerty"
-a.capitalize() 	# Converts the first character to upper case
+a.capitalize() 		# Converts the first character to upper case
 a.casefold() 		# Converts string into lower case
 a.center() 			# Returns a centered string
 a.count() 			# Returns the number of times a specified value occurs in a string
 a.encode() 			# Returns an encoded version of the string
 a.endswith() 		# Returns true if the string ends with the specified value
 a.expandtabs() 		# Sets the tab size of the string
-a.find() 			  # Searches the string for a specified value and returns the position of where it was found
+a.find() 			# Searches the string for a specified value and returns the position of where it was found
 a.format() 			# Formats specified values in a string
 a.format_map() 		# Formats specified values in a string
 a.index() 			# Searches the string for a specified value and returns the position of where it was found
@@ -67,7 +67,7 @@ a.isprintable() 	# Returns True if all characters in the string are printable
 a.isspace() 		# Returns True if all characters in the string are whitespaces
 a.istitle() 		# Returns True if the string follows the rules of a title
 a.isupper() 		# Returns True if all characters in the string are upper case
-a.join() 			  # Joins the elements of an iterable to the end of the string
+a.join() 			# Joins the elements of an iterable to the end of the string
 a.ljust() 			# Returns a left justified version of the string
 a.lower() 			# Converts a string into lower case
 a.lstrip() 			# Returns a left trim version of the string
@@ -78,23 +78,38 @@ a.rfind() 			# Searches the string for a specified value and returns the last po
 a.rindex() 			# Searches the string for a specified value and returns the last position of where it was found
 a.rjust() 			# Returns a right justified version of the string
 a.rpartition() 		# Returns a tuple where the string is parted into three parts
-a.rsplit() 			  # Splits the string at the specified separator, and returns a list
-a.rstrip() 			  # Returns a right trim version of the string
-a.split() 			  # Splits the string at the specified separator, and returns a list
+a.rsplit() 			# Splits the string at the specified separator, and returns a list
+a.rstrip() 			# Returns a right trim version of the string
+a.split() 			# Splits the string at the specified separator, and returns a list
 a.splitlines() 		# Splits the string at line breaks and returns a list
 a.startswith() 		# Returns true if the string starts with the specified value
-a.strip() 			  # Returns a trimmed version of the string
-a.swapcase() 		  # Swaps cases, lower case becomes upper case and vice versa
-a.title() 			  # Converts the first character of each word to upper case
+a.strip() 			# Returns a trimmed version of the string
+a.swapcase() 		# Swaps cases, lower case becomes upper case and vice versa
+a.title() 			# Converts the first character of each word to upper case
 a.translate() 		# Returns a translated string
-a.upper() 			  # Converts a string into upper case
-a.zfill() 			  # Fills the string with a specified number of 0 values at the beginning
+a.upper() 			# Converts a string into upper case
+a.zfill() 			# Fills the string with a specified number of 0 values at the beginning
+
+### Boolean Type:	bool
+# Almost any value is evaluated to True if it has some sort of content.
+# In fact, there are not many values that evaluate to False, except empty values, such as (), [], {}, "", the number 0, and the value None. 
 
 
+#################################
+## Operators
+#################################
+# +	Addition | x + y	
+# -	Subtraction | x - y	
+# *	Multiplication | x * y	
+# /	Division | x / y	
+# %	Modulus | x % y	
+# **	Exponentiation | x ** y	
+# //	Floor division | x // y	
+# :=	print(x := 3) | x = 3; print(x)
 
-
-
-
+#################################
+## Python Lists
+#################################
 
 
 
