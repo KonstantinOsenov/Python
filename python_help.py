@@ -14,20 +14,21 @@ x = "fantastic"
 ## data types
 #################################
 type(x)
-## Text Type:	str
-## Numeric Types:	int, float, complex
 # Sequence Types:	list, tuple, range
 # Mapping Type:	dict
 # Set Types:	set, frozenset
-## Boolean Type:	bool
 # Binary Types:	bytes, bytearray, memoryview
 # None Type:	NoneType
 
-### Numeric Types:	int, float, complex
+#################################
+#### Numeric Types:	int, float, complex
+#################################
 import random
 print(random.randrange(1, 10))
 
-### Text Type:	str
+#################################
+#### Text Type:	str
+#################################
 len("Hello, World!") # String Length
 print("free" in "The best things in life are free!") # Check String
 
@@ -90,9 +91,23 @@ a.translate() 		# Returns a translated string
 a.upper() 			# Converts a string into upper case
 a.zfill() 			# Fills the string with a specified number of 0 values at the beginning
 
-### Boolean Type:	bool
+#################################
+#### Boolean Type:	bool
+#################################
 # Almost any value is evaluated to True if it has some sort of content.
 # In fact, there are not many values that evaluate to False, except empty values, such as (), [], {}, "", the number 0, and the value None. 
+
+#################################
+#### Python Lists
+#################################
+
+
+
+
+
+
+
+
 
 
 #################################
@@ -108,7 +123,7 @@ a.zfill() 			# Fills the string with a specified number of 0 values at the begin
 # :=	print(x := 3) | x = 3; print(x)
 
 #################################
-## Python Lists
+## 
 #################################
 
 
