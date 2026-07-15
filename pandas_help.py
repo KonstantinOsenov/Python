@@ -62,7 +62,7 @@ pd.options.display.max_columns = None   # show all of the columns
 pd.options.display.max_rows = None      # show all of the rows, use carefully with huge datasets
 pd.options.display.max_rows = 200       # not more than 200 rows
 pd.options.display.max_colwidth = None  # show full column value
-
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning) # turn off some of the warnings
 
 ######################################################################################################################
 # Pandas DataFrame
@@ -86,9 +86,11 @@ df[df['country_code'] == 'US']              # by value
 df[df.index.isin((53, 55))]                 # by index
 df[~df.index.isin((53, 55))]                # '~' - NOT (not in (53, 55))
 df[df['column_1'].str.contains('ball')]     # substr 'ball' in column_1
-
+df[df["column_1"].isnull()]                 # check if null
+    
 ## Diferent operations
 df.drop_duplicates(inplace=True)    # drop duplicates. inplace=True - changes will be applied to the current DF
+len(df)                             # get lenght of the DF
     
 ##############
 ## Columns
