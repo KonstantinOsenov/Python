@@ -3,6 +3,7 @@ import pyodbc
 pyodbc.drivers()
 
 driver = 'ODBC Driver 17 for SQL Server' # need to install
+# f.ex. https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver15
 server = 'server_name'
 database = 'db_name'
 
