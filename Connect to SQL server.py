@@ -15,6 +15,13 @@ cursor.execute('select top(100) * from abc.abc')
 for i in cursor:
     print(i)
 
+# with user and password
+
+user = '' # !!! fill in the username
+psw = '' # !!! fill in the password
+
+con_az_sql_string = f'DRIVER={driver};SERVER={server};DATABASE={database};Uid={user};Pwd={psw};'
+
 # another option with a "popup" window when you need to enter credentials
 con_string = f'DRIVER={driver};SERVER={server};DATABASE={database};UID=<email_address>;Authentication=ActiveDirectoryInteractive;'
 cnxn = pyodbc.connect(con_string)
