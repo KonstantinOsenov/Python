@@ -19,11 +19,6 @@ from_date = '2023-11-09'
 to_date   = '2023-11-10'
 
 def get_disp(rs, from_date, to_date):
-
-    _yesterday = datetime.date.today() - datetime.timedelta(days = 1) #report is a day behind; we need to get yesterdays date
-    _getdate = datetime.datetime.strftime(_yesterday, '%Y-%m-%d') #now we need to format yesterdays date
-
-    #_stopdate = datetime.datetime.strptime(_getdate, '%Y-%m-%d').date() #now we define yesterdays date as the STOP date
     _stopdate = datetime.datetime.strptime(to_date, '%Y-%m-%d').date()
     _startdate = datetime.datetime.strptime(from_date, '%Y-%m-%d').date() #now we need to know the last report downloaded
 
@@ -41,8 +36,7 @@ def get_disp(rs, from_date, to_date):
                               ,auth=('<user_id>', '<password>')).content,'utf-8')
         
         csvobject = StringIO(csvbytes)
-
-       
+        
         df = pd.read_csv(csvobject, index_col=False,)      
         df.columns = df.columns.str.replace(' ', '_')
         df.columns = df.columns.str.lower()
