@@ -26,3 +26,29 @@ point = Point(17.952306718800717, 59.36417301519245 ) # create point
 
 print(polygon.contains(point)) # check if polygon contains point
 print(point.within(polygon)) # check if a point is in the polygon 
+
+
+#### GPS examples
+
+# https://docs.microsoft.com/en-us/azure/azure-maps/how-to-search-for-address
+
+import geopy.distance
+
+coords_1 = (52.2296756, 21.0122287)
+coords_2 = (52.406374, 16.9251681)
+
+geopy.distance.distance(coords_1, coords_2).km
+
+# calc distance
+def get_coordinates(lat_1, lon_1, coordinates_2):
+    coords_1 = (lat_1, lon_1)
+    coords_2 = coordinates_2
+
+    return geopy.distance.distance(coords_1, coords_2).km
+
+# check
+coords_1 = (52.2296756, 21.0122287)
+coords_2 = (52.406374, 16.9251681)
+get_coordinates(coords_1[0], coords_1[1], coords_2)
+
+help(geopy.distance.distance)
