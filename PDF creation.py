@@ -187,3 +187,210 @@ with pdf.table(
             
 # save the pdf with name .pdf
 pdf.output("defense_materials_test.pdf") 
+
+
+#####################################################################################
+# TTTTTTTTTTEEEEEEEEEEEESSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTT
+pdf = FPDF()
+pdf.add_page()
+pdf.set_font("Arial", size = 15)
+pdf.cell(200, 10, "Defense materials", new_x="LMARGIN", new_y="NEXT", align='C')
+
+pdf.set_font("Arial", size = 7)
+pdf.write_html(
+    f"""
+    <table border="0">
+    <thead>
+    <tr>
+        <th width="10%"> </th>
+        <th width="40%"> </th>
+        <th width="10%"> </th>
+        <th width="40%"> </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+        <td colspan="2"><font size="10">Billing and Shipping address match</font></td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+    </tr>
+    <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
+    <tr>
+        <td colspan="2"><b>Billing address</b></td>
+        <td> </td>
+        <td colspan="2"><b>Shipping address</b></td>
+        <td> </td>
+    </tr>
+    
+    <tr>
+        <td> State</td>
+        <td> | {items_to_pdf_list_excel_billing[0][1]} </td>
+        <td> State</td>
+        <td> | {items_to_pdf_list_excel_ship[0][1]} </td>
+    </tr>
+    <tr>
+        <td> City</td>
+        <td> | {items_to_pdf_list_excel_billing[1][1]} </td>
+        <td> City</td>
+        <td> | {items_to_pdf_list_excel_ship[1][1]} </td>
+    </tr>
+    <tr>
+        <td> ZIP</td>
+        <td> | {items_to_pdf_list_excel_billing[2][1]} </td>
+        <td> ZIP</td>
+        <td> | {items_to_pdf_list_excel_ship[2][1]} </td>
+    </tr>
+    <tr>
+        <td> Address</td>
+        <td> | {items_to_pdf_list_excel_billing[3][1]} </td>
+        <td> Address</td>
+        <td> | {items_to_pdf_list_excel_ship[3][1]} </td>
+    </tr>
+    
+    
+    
+    <tr>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+    </tr>
+    </tbody></table>
+    
+    <table border="1">
+    <thead>
+    <tr>
+        <th width="25%">{TABLE_DATA[0][0]}</th>
+        <th width="25%">{TABLE_DATA[0][1]}</th>
+        <th width="15%">{TABLE_DATA[0][2]}</th>
+        <th width="35%">{TABLE_DATA[0][3]}</th>
+    </tr></thead>
+    <tbody><tr>
+    <td>{'</td><td>'.join(items_to_pdf_list_excel_billing[0])}</td>
+    </tr><tr bgcolor="grey">
+    <td>{'</td><td>'.join(items_to_pdf_list_excel_billing[1])}</td>
+    </tr><tr>
+    <td>{'</td><td>'.join(items_to_pdf_list_excel_billing[2])}</td>
+    </tr><tr>
+    <td>{'</td><td>'.join(items_to_pdf_list_excel_billing[3])}</td>
+    </tr>
+    <tr>
+        <td> <b><em> normal text </em></b> </td>
+        <td> pdf.cell(200, 10, "Test:", 1, new_x="LMARGIN", new_y="NEXT", align='L') </td>
+        <td> pdf.cell(200, 10, "Test:", 1, new_x="LMARGIN", new_y="NEXT", align='L') </td>
+        <td> pdf.cell(200, 10, "Test:", 1, new_x="LMARGIN", new_y="NEXT", align='L') </td>
+    </tr>
+    </tbody></table>""",
+    table_line_separators=True,
+)            
+
+# save the pdf with name .pdf
+pdf.output("defense_materials_test_html.pdf") 
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# TTTTTTTTTTEEEEEEEEEEEESSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTT
+pdf = FPDF()
+pdf.add_page()
+pdf.set_font("Arial", size = 15)
+pdf.cell(200, 10, "Defense materials", new_x="LMARGIN", new_y="NEXT", align='C')
+
+pdf.set_font("Arial", size = 7)
+pdf.write_html(
+    f"""
+    
+    <table>
+    <thead></thead>
+    <tbody>
+
+    <tr>
+        <td width="7%" colspan="2"><font size="10">Billing and Shipping address match</font></td>
+        <td width="43%"> </td>
+        <td width="7%"> </td>
+        <td width="43%"> </td>
+    </tr>
+    <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
+    <tr>
+        <td colspan="2"><b>Billing address</b></td>
+        <td> </td>
+        <td colspan="2"><b>Shipping address</b></td>
+        <td> </td>
+    </tr>
+    <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
+    <tr>
+        <td> State</td>
+        <td> | {items_to_pdf_list_excel_billing[0][1]} </td>
+        <td> State</td>
+        <td> | {items_to_pdf_list_excel_ship[0][1]} </td>
+    </tr>
+    <tr>
+        <td> City</td>
+        <td> | {items_to_pdf_list_excel_billing[1][1]} </td>
+        <td> City</td>
+        <td> | {items_to_pdf_list_excel_ship[1][1]} </td>
+    </tr>
+    <tr>
+        <td> ZIP</td>
+        <td> | {items_to_pdf_list_excel_billing[2][1]} </td>
+        <td> ZIP</td>
+        <td> | {items_to_pdf_list_excel_ship[2][1]} </td>
+    </tr>
+    <tr>
+        <td> Address</td>
+        <td> | {items_to_pdf_list_excel_billing[3][1]} </td>
+        <td> Address</td>
+        <td> | {items_to_pdf_list_excel_ship[3][1]} </td>
+    </tr>
+    </tbody></table>
+    
+    
+    
+    <table>
+    <thead></thead>
+    <tbody>
+
+    <tr>
+        <td width="10%" colspan="2"><font size="10">Delivery info</font></td>
+        <td width="40%"> </td>
+        <td width="10%"> </td>
+        <td width="40%"> </td>
+    </tr>
+    <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
+    <tr>
+        <td colspan="2"><b>Earliest carrier info</b></td>
+        <td> </td>
+        <td colspan="2"><b>Latest carrier info</b></td>
+        <td> </td>
+    </tr>
+    <tr> <td> </td> <td> </td> <td> </td> <td> </td> </tr>
+    <tr>
+        <td> Status date</td>
+        <td> | {items_to_pdf_list_ldw_earliest[0][1]} </td>
+        <td> Status date</td>
+        <td> | {items_to_pdf_list_ldw_latest[0][1]} </td>
+    </tr>
+    <tr>
+        <td> Delivery status</td>
+        <td> | {items_to_pdf_list_ldw_earliest[1][1]} </td>
+        <td> Delivery status</td>
+        <td> | {items_to_pdf_list_ldw_latest[1][1]} </td>
+    </tr>
+    <tr>
+        <td> Carrier status</td>
+        <td> | {items_to_pdf_list_ldw_earliest[2][1]} </td>
+        <td> Carrier status</td>
+        <td> | {items_to_pdf_list_ldw_latest[2][1]} </td>
+    </tr>
+    </tbody></table> 
+    """,
+    table_line_separators=True,
+)            
+
+# save the pdf with name .pdf
+pdf.output("defense_materials_test_html.pdf") 
