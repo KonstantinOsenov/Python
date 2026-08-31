@@ -52,3 +52,47 @@ coords_2 = (52.406374, 16.9251681)
 get_coordinates(coords_1[0], coords_1[1], coords_2)
 
 help(geopy.distance.distance)
+
+
+######## nearest store
+%pip install geopy
+
+import pandas as pd
+import geopy.distance
+
+dim_df_pandas = dim_df[['location_code', 'latitude', 'longitude', 'geo_country_iso_code']].toPandas()
+
+def get_distance(lat1, lon1, lat2, lon2):
+    try:
+        coords_1 = (lat1, lon1)
+        coords_2 = (lat2, lon2)
+        return geopy.distance.geodesic(coords_1, coords_2).km
+    except:
+        pass#print('error')
+
+get_distance(55.570278000, 13.058056000, 55.607795282231486, 13.003181411432589)
+#test
+dim_df_pandas['distance'] = dim_df_pandas.apply(lambda x: get_distance(55.570278000, 13.058056000, x['latitude'], x['longitude']), axis=1)
+dim_df_pandas.sort_values('distance')
+
+def get_nearest_store(store_country, store_code, store_latitude, store_longitude):
+    try:
+        dim_df_pandas['distance'] = dim_df_pandas.apply(lambda x: get_distance(store_latitude, store_longitude, x['latitude'], x['longitude']), axis=1)
+        output = dim_df_pandas[dim_df_pandas['location_code'] != store_code].sort_values('distance')
+
+        output_location_code = output.iloc[0]['location_code']
+        output_distance = output.iloc[0]['distance']
+
+        return output_distance#, output_location_code
+    except:
+        pass#print('error')
+
+#test
+get_nearest_store('SE', 'SE0326', 55.570278000, 13.058056000)
+dim_df_pandas['nearest_store_distance'] = dim_df_pandas.apply(lambda x: get_nearest_store(x['geo_country_iso_code'], x['location_code'], x['latitude'], x['longitude']), axis=1)
+dim_df_pandas
+
+
+
+
+
