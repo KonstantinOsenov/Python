@@ -93,6 +93,19 @@ dim_df_pandas['nearest_store_distance'] = dim_df_pandas.apply(lambda x: get_near
 dim_df_pandas
 
 
+#####
+
+def get_distance(lat1, lon1, lat2, lon2):
+    try:
+        coords_1 = (lat1, lon1)
+        coords_2 = (lat2, lon2)
+        return geopy.distance.geodesic(coords_1, coords_2).km
+    except:
+        pass
+    #print(coords_1)
+    #print(geopy.distance.geodesic(coords_1, coords_2).km)
+
+get_distance(55.570278000, 13.058056000, 55.607795282231486, 13.003181411432589)
 
 
 
