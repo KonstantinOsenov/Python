@@ -15,3 +15,19 @@ json_response   = json.loads(response.decode('utf-8'))
 # Print country
 print(json_response['country'])
 print(json_response)
+
+def ipInfo(addr=''):
+    if addr == '':
+        url = 'https://ipinfo.io/json'
+    else:
+        url = 'https://ipinfo.io/' + addr + '/json'
+    res = urlopen(url)
+    #response from url(if res==None then check connection)
+    data = load(res)
+    #will load the json response into data
+    for attr in data.keys():
+        #will print the data line by line
+        print(attr,' '*13+'\t->\t',data[attr])
+
+ipInfo('73.206.72.32')
+
