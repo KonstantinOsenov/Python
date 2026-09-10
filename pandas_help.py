@@ -113,6 +113,14 @@ df['date_weekday'] = df['datetime'].dt.dayofweek                # day of week, 0
 df['date_hour'] = df['datetime'].dt.hour                        # hour
 df['days_since_smth'] = (df['date'] - df['reg_date']).dt.days   # number of days between two dates
 
+df['timestamp_dt'] = pd.to_datetime(df['timestamp'])
+df['timestamp_dt_sec'] = df['timestamp_dt'].dt.strftime('%Y-%m-%d %H-%M-%S')
+df['timestamp_dt_min'] = df['timestamp_dt'].dt.strftime('%Y-%m-%d %H-%M')
+df['timestamp_dt_hr'] = df['timestamp_dt'].dt.strftime('%Y-%m-%d %H')
+df['timestamp_minute'] = df['timestamp_dt'].dt.minute
+df['timestamp_sec'] = df['timestamp_dt'].dt.second
+
+
 ### calcs (tbd)
 df['discount_perc_item_price'] = 100 - round(order_df['net_price_per_item'] / order_df['gross_price_per_item'] * 100, 2)
 # delete lambda x? df['items_gross_price'] = df.apply(lambda x: parse_shipping(x['shippings']), axis=1)   # using functions
