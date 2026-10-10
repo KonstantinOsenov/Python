@@ -61,4 +61,16 @@ data = b"0628d04250b206744eb7e7af19122272"
 encoded = base64.b64encode(data)
 print(encoded) # Output: b'R2Vla3NGb3JHZWVrcw=='
 
+#######
+
+import base64
+
+# String to encode
+string_to_encode = """test"""
+
+# Encode the string
+encoded_string = base64.b64encode(string_to_encode.encode("utf-8")).decode("utf-8")
+
+# Print the encoded string
+print(encoded_string)
 
