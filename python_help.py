@@ -74,3 +74,28 @@ yesterday  = datetime.datetime.strftime(dt_now - timedelta(1), '%Y-%m-%d')
 from_date  = yesterday
 
 print("from_date -", from_date, "| to_date -", to_date)
+
+
+
+# Get country id by ISO code
+def get_country_id(input_country_code_string):
+    
+    if input_country_code_string == "All":
+        output_country_id_list = [x[0] for x in df_dim_country.collect()]
+        return output_country_id_list
+    
+    input_country_code_list_tmp = input_country_code_string.split(",") 
+    input_country_code_list = [x.strip() for x in input_country_code_list_tmp]
+    #print(input_country_code_list)
+
+    output_country_id_list = [x[0] for x in df_dim_country.filter(F.col("country_code").isin(input_country_code_list)).collect()]
+    #print(output_country_id_list)
+
+    return output_country_id_list
+
+# get_country_id("IN, US")
+# get_country_id("IN")
+# get_country_id("All")
+
+
+
