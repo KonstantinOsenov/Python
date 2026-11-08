@@ -1,0 +1,38 @@
+Fixing the problem with certificates (unable to install packages)
+
+ERROR: Could not install packages due to an OSError: Could not find a suitable TLS CA certificate bundle, invalid path: $env:APPDATA\custom-ca-bundle.pem
+
+
+needed to change the path in the file pip.ini (folder - C:\Users\user\AppData\Roaming\pip)
+
+################################################################################################################################################
+################################################################################################################################################
+################################################################################################################################################
+
+old version
+[global]
+cert = $env:APPDATA\custom-ca-bundle.pem
+
+
+new version
+[global]
+cert = C:\Users\user\Anaconda3_2\Lib\site-packages\certifi\cacert.pem
+path = C:\Users\user\Anaconda3_2\Lib\site-packages\certifi\cacert.pem
+
+
+
+
+
+import certifi
+certifi.where()
+
+%pip config -v list
+
+
+%pip install xlwt
+
+-----------------------
+[global]
+cert = C:\Users\user\AppData\custom-ca-bundle.pem
+path = C:\Users\user\Anaconda3_2\Lib\site-packages\certifi\cacert.pem
+
