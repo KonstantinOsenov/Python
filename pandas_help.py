@@ -181,6 +181,10 @@ datetime_object = datetime.strptime(asd, '%Y-%m-%d %H:%M:%S')
 print(datetime_object)
 print(datetime_object.weekday())
 
+# data types
+df["attr1"]  = df["attr111"].fillna(0).astype(np.int64)
+df["attr1"]  = df["attr111"].astype(str) + "_" + df["attr112"].astype(str)
+
 
 # in some cases you shoul use tuple as colum name
 .sort_values(('user_id', 'count'), ascending = False)
