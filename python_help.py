@@ -7,6 +7,10 @@ txt = "The rain in Spain"
 x = re.search("^The.*Spain$", txt)
 x
 
+x='hello 42 I\'m a 32 string 30'
+re.sub('[^0-9]+', '', x)
+>> 423230
+
 # read file
 script_file = 'some_scripts.txt'   # file with SQL query
 with open(script_file) as f:
@@ -98,4 +102,31 @@ def get_country_id(input_country_code_string):
 # get_country_id("All")
 
 
+# remove letters from string (keep only digits)
+def get_cart(s):
+    out_s = re.findall(r'\d+', s)[0]
+    return out_s
+#get_cart("3404427911MXMASTER")
+all_cb_df['cart_id'] = all_cb_df.apply(lambda x: get_cart(x['Order ID']), axis=1)
+
+
+# pandas df to list
+malicious_bp_to_block_list = tmp_df.business_partner_no.values.tolist()#[:5]
+malicious_bp_to_block_list
+
+
+# add column with random values
+import random
+db_qv_exa_df_len = db_qv_exa_df.shape[0]
+random_list = random.sample(range(1, db_qv_exa_df_len+1), db_qv_exa_df_len)
+db_qv_exa_df['random_number'] = random_list
+
+
+# windows path 
+from os import listdir
+from os.path import isfile, join
+mypath = project_path + r"\some path\folder"
+files_list = listdir(mypath)
+#onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+files_list
 
